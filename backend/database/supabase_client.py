@@ -20,19 +20,40 @@ if SUPABASE_SDK_AVAILABLE:
     SUPABASE_URL = os.getenv("SUPABASE_URL")
     SUPABASE_KEY = os.getenv("SUPABASE_KEY")
     
-    if not SUPABASE_URL or not SUPABASE_KEY:
-        raise ValueError("SUPABASE_URL and SUPABASE_KEY must be set in environment variables")
+    _supabase_client = None
+    _supabase_available = bool(SUPABASE_URL and SUPABASE_KEY)
     
-    _supabase_client: Client = None
+    if not _supabase_available:
+        print("⚠️ SUPABASE_URL/SUPABASE_KEY not set — running without database")
     
-    def get_supabase_client() -> Client:
+    class _DummyResult:
+        def __init__(self):
+            self.data = []
+    
+    class _DummyTable:
+        def select(self, *a, **kw): return self
+        def insert(self, *a, **kw): return self
+        def update(self, *a, **kw): return self
+        def delete(self, *a, **kw): return self
+        def eq(self, *a, **kw): return self
+        def order(self, *a, **kw): return self
+        def single(self, *a, **kw): return self
+        def execute(self, *a, **kw): return _DummyResult()
+    
+    class _DummyClient:
+        def table(self, name): return _DummyTable()
+    
+    def get_supabase_client():
         """Get Supabase client using REST API (works better than direct PostgreSQL)"""
         global _supabase_client
+        if not _supabase_available:
+            return _DummyClient()
         if _supabase_client is None:
             _supabase_client = create_client(SUPABASE_URL, SUPABASE_KEY)
         return _supabase_client
     
-    print("✅ Using Supabase REST API (recommended)")
+    if _supabase_available:
+        print("✅ Using Supabase REST API (recommended)")
 
 else:
     # Fallback to direct PostgreSQL connection
