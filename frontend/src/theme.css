@@ -1,0 +1,219 @@
+/* Theme-aware color system for warm dark and light modes */
+
+:root {
+    /* Light mode - Warm Cream Aesthetic */
+    --background: 35 33% 98%;
+    --foreground: 20 14% 15%;
+
+    --card: 33 30% 97%;
+    --card-foreground: 20 14% 15%;
+
+    --popover: 35 33% 98%;
+    --popover-foreground: 20 14% 15%;
+
+    --primary: 25 95% 53%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 84 85% 43%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 30 20% 92%;
+    --muted-foreground: 25 30% 40%;
+
+    --accent: 350 89% 60%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 30 20% 88%;
+    --input: 30 20% 88%;
+    --ring: 25 95% 53%;
+
+    --radius: 0.75rem;
+
+    /* Chart colors - warm light mode */
+    --chart-1: 25 95% 53%;
+    --chart-2: 84 85% 43%;
+    --chart-3: 350 89% 60%;
+    --chart-4: 45 93% 47%;
+    --chart-5: 142 71% 45%;
+
+    /* Custom warm theme colors - light mode */
+    --glass-bg: 35 33% 98% / 0.85;
+    --glass-border: 30 20% 85%;
+    --card-hover-bg: 33 30% 95%;
+    --text-on-card: 20 14% 15%;
+
+    /* Brand warm colors */
+    --sunset-orange: 25 95% 53%;
+    --sunset-orange-light: 27 96% 61%;
+    --forest-lime: 84 85% 43%;
+    --warm-coral: 350 89% 60%;
+    --amber-gold: 45 93% 47%;
+}
+
+.dark {
+    /* Dark mode - Warm Stone Aesthetic */
+    --background: 20 14% 7%;
+    --foreground: 33 25% 95%;
+
+    --card: 20 10% 12%;
+    --card-foreground: 33 25% 95%;
+
+    --popover: 20 14% 7%;
+    --popover-foreground: 33 25% 95%;
+
+    --primary: 27 96% 61%;
+    --primary-foreground: 20 14% 7%;
+
+    --secondary: 82 78% 55%;
+    --secondary-foreground: 20 14% 7%;
+
+    --muted: 20 10% 18%;
+    --muted-foreground: 30 15% 65%;
+
+    --accent: 351 83% 70%;
+    --accent-foreground: 20 14% 7%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 33 25% 95%;
+
+    --border: 20 10% 20%;
+    --input: 20 10% 20%;
+    --ring: 27 96% 61%;
+
+    /* Chart colors - warm dark mode */
+    --chart-1: 27 96% 61%;
+    --chart-2: 82 78% 55%;
+    --chart-3: 351 83% 70%;
+    --chart-4: 43 96% 56%;
+    --chart-5: 142 69% 58%;
+
+    /* Custom warm theme colors - dark mode */
+    --glass-bg: 20 10% 12% / 0.7;
+    --glass-border: 20 10% 25%;
+    --card-hover-bg: 20 10% 16%;
+    --text-on-card: 33 25% 95%;
+}
+
+/* Apply theme-aware colors to base elements */
+* {
+    border-color: hsl(var(--border));
+}
+
+body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+}
+
+/* Utility classes for theme-aware styling */
+.theme-card {
+    background-color: hsl(var(--card) / 0.7);
+    color: hsl(var(--card-foreground));
+    border-color: hsl(var(--border));
+}
+
+.theme-card:hover {
+    background-color: hsl(var(--card-hover-bg));
+}
+
+.theme-glass {
+    background-color: hsl(var(--glass-bg));
+    border-color: hsl(var(--glass-border));
+    backdrop-filter: blur(16px);
+}
+
+.theme-button-primary {
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+    color: hsl(var(--primary-foreground));
+}
+
+.theme-button-secondary {
+    background-color: hsl(var(--secondary));
+    color: hsl(var(--secondary-foreground));
+}
+
+.theme-text-muted {
+    color: hsl(var(--muted-foreground));
+}
+
+.theme-border {
+    border-color: hsl(var(--border));
+}
+
+/* Chart theme colors - warm */
+.recharts-text {
+    fill: hsl(var(--foreground)) !important;
+}
+
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+    stroke: hsl(var(--border)) !important;
+    opacity: 0.3;
+}
+
+.recharts-tooltip-wrapper {
+    background-color: hsl(var(--popover)) !important;
+    border: 1px solid hsl(var(--border)) !important;
+    border-radius: var(--radius);
+    color: hsl(var(--popover-foreground));
+}
+
+/* Warm Gradient Overlays */
+.warm-overlay {
+    background: linear-gradient(135deg,
+            hsl(var(--sunset-orange) / 0.1) 0%,
+            hsl(var(--warm-coral) / 0.05) 50%,
+            hsl(var(--amber-gold) / 0.1) 100%);
+}
+
+/* Organic Shapes */
+.organic-blob {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    background: linear-gradient(135deg,
+            hsl(var(--sunset-orange) / 0.2),
+            hsl(var(--warm-coral) / 0.2));
+}
+
+/* Animations */
+@keyframes slideInUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutDown {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    to {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+}
+
+@keyframes warmGlow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 20px hsl(var(--sunset-orange) / 0.3);
+    }
+
+    50% {
+        box-shadow: 0 0 40px hsl(var(--sunset-orange) / 0.5),
+            0 0 60px hsl(var(--warm-coral) / 0.3);
+    }
+}
+
+.animate-warm-glow {
+    animation: warmGlow 3s ease-in-out infinite;
+}
