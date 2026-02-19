@@ -2,7 +2,7 @@ import { useRef, useState, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Text, Float, Stars, Trail } from '@react-three/drei';
 import * as THREE from 'three';
-import { motion } from 'framer-motion';
+
 
 // Agent Node Component
 function AgentNode({ position, label, color, onClick }: any) {
@@ -65,14 +65,14 @@ function AgentNode({ position, label, color, onClick }: any) {
 function Connection({ start, end, color }: any) {
     const points = useMemo(() => [new THREE.Vector3(...start), new THREE.Vector3(...end)], [start, end]);
 
+    const positions = useMemo(() => new Float32Array(points.flatMap(p => [p.x, p.y, p.z])), [points]);
+
     return (
         <line>
             <bufferGeometry>
                 <bufferAttribute
                     attach="attributes-position"
-                    count={points.length}
-                    array={new Float32Array(points.flatMap(p => [p.x, p.y, p.z]))}
-                    itemSize={3}
+                    args={[positions, 3]}
                 />
             </bufferGeometry>
             <lineBasicMaterial color={color} opacity={0.3} transparent linewidth={1} />
@@ -100,7 +100,7 @@ function DataPacket({ route }: { route: [number, number, number][] }) {
     return (
         <mesh ref={ref}>
             <sphereGeometry args={[0.1]} />
-            <meshBasicMaterial color="#ffffff" emissive="#ffffff" emissiveIntensity={2} />
+            <meshStandardMaterial color="#ffffff" emissive="#ffffff" emissiveIntensity={2} />
             <Trail width={0.2} length={4} color={new THREE.Color(2, 2, 10)} attenuation={(t) => t * t}>
                 <mesh />
             </Trail>
