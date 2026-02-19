@@ -16,8 +16,9 @@ from openai import OpenAI
 env_path = Path(__file__).parent.parent.parent / '.env'
 load_dotenv(dotenv_path=env_path)
 
-# Initialize OpenAI client
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+# Initialize OpenAI client (only if API key is available)
+_api_key = os.getenv("OPENAI_API_KEY")
+client = OpenAI(api_key=_api_key) if _api_key else None
 
 
 class AdvancedNLPAnalyzer:
