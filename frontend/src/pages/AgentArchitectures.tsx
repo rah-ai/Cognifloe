@@ -152,7 +152,10 @@ export default function AgentArchitectures() {
         const userId = getUserIdFromToken();
         const key = getPositionsKey(userId);
         localStorage.removeItem(key);
-        setTimeout(() => setArrowUpdateTrigger(prev => prev + 1), 100);
+        // Trigger multiple arrow updates during the spring animation
+        [100, 300, 500, 800].forEach(delay => {
+            setTimeout(() => setArrowUpdateTrigger(prev => prev + 1), delay);
+        });
     }, []);
 
     const handleRefreshState = async () => {
@@ -365,6 +368,7 @@ export default function AgentArchitectures() {
                                             drag
                                             dragMomentum={false}
                                             dragElastic={0.1}
+                                            dragConstraints={containerRef}
                                             onDragStart={() => handleDragStart(agentKey)}
                                             onDrag={() => handleDrag()}
                                             onDragEnd={(_, info) => handleDragEnd(agentKey, info)}
