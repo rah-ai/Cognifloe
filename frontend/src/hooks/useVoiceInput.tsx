@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react"
+import { useRef, useEffect } from "react"
 
 interface VoiceInputProps {
     onTranscript: (text: string) => void

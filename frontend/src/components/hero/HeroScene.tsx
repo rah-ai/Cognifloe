@@ -100,9 +100,7 @@ function ConnectionLines() {
                     <bufferGeometry>
                         <bufferAttribute
                             attach="attributes-position"
-                            count={2}
-                            array={new Float32Array([...line.start, ...line.end])}
-                            itemSize={3}
+                            args={[new Float32Array([...line.start, ...line.end]), 3]}
                         />
                     </bufferGeometry>
                     <lineBasicMaterial color="#ff6b58" opacity={0.3} transparent />

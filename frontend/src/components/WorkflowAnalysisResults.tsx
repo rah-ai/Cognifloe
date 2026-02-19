@@ -1,5 +1,5 @@
 import { motion } from "framer-motion"
-import { Brain, TrendingUp, AlertTriangle, DollarSign, Target, CheckCircle2, XCircle, ArrowRight } from "lucide-react"
+import { Brain, TrendingUp, AlertTriangle, DollarSign, Target, CheckCircle2, ArrowRight } from "lucide-react"
 
 interface AnalysisResult {
     complexity: {
