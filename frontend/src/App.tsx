@@ -14,6 +14,8 @@ import MLPredictions from "./pages/MLPredictions"
 import ShadowMode from "./pages/ShadowMode"
 import AgentCatalog from "./pages/AgentCatalog"
 
+import ScrollToTop from "./components/ScrollToTop"
+
 import { WorkflowProvider } from "./context/WorkflowContext"
 
 function App() {
@@ -37,6 +39,7 @@ function App() {
                 <Route path="settings" element={<Settings />} />
               </Route>
             </Routes>
+            <ScrollToTop />
           </Router>
         </WorkflowProvider>
       </ToastProvider>
